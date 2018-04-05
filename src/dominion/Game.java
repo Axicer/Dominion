@@ -1,5 +1,6 @@
 package dominion;
 import java.util.*;
+
 import dominion.card.*;
 import dominion.card.common.*;
 
@@ -46,6 +47,32 @@ public class Game {
 	 * - 8 (si 2 joueurs) ou 12 (si 3 ou 4 joueurs) Estate, Duchy et Province 	 * - 10 * (n-1) Curse où n est le nombre de joueurs dans la partie
 	 */
 	public Game(String[] playerNames, List<CardList> kingdomStacks) {
+		players = new Player[playerNames.length];
+		for(int i = 0 ; i < playerNames.length ; i ++){
+			players[i] = new Player(playerNames[i], this);
+		}
+		CardList copperList = new CardList();
+		CardList silverList = new CardList();
+		CardList goldList = new CardList();
+		CardList estateList = new CardList();
+		CardList dutchyList = new CardList();
+		CardList provinceList = new CardList();
+		for(int i = 0 ; i < 60 ; i++){
+			copperList.add(new Copper());
+			if(i < 40)silverList.add(new Silver());
+			if(i < 30)goldList.add(new Gold());
+			if(i < (players.length == 2 ? 8 : 12)){
+				estateList.add(new Estate());
+				dutchyList.add(new Duchy());
+				provinceList.add(new Province());
+			}
+		}
+		supplyStacks.add(copperList);
+		supplyStacks.add(silverList);
+		supplyStacks.add(goldList);
+		supplyStacks.add(estateList);
+		supplyStacks.add(dutchyList);
+		supplyStacks.add(provinceList);
 	}
 
 	/**
@@ -56,16 +83,14 @@ public class Game {
 	 * @param index indice dans le tableau des joueurs du joueur à renvoyer
 	 */
 	public Player getPlayer(int index) {
-		//TODO
-		return null;
+		return players[index];
 	}
 
 	/**
 	 * Renvoie le nombre de joueurs participant à la partie
 	 */
 	public int numberOfPlayers() {
-		//TODO
-		return 0;
+		return players.length;
 	}
 
 	/**
@@ -73,8 +98,10 @@ public class Game {
 	 * joueurs, ou -1 si le joueur n'est pas dans le tableau.
 	 */
 	private int indexOfPlayer(Player p) {
-		//TODO
-		return 0;
+		for(int i = 0 ; i < players.length ; i++){
+			if(players[i].equals(p))return i;
+		}
+		return -1;
 	}
 
 	/**
@@ -90,8 +117,15 @@ public class Game {
 	 * premier).
 	 */
 	public List<Player> otherPlayers(Player p) {
-		//TODO
-		return null;
+		List<Player> pl = new ArrayList<Player>();
+		int i = indexOfPlayer(p);
+		int cur = i+1;
+		while(cur != i){
+			if(cur == numberOfPlayers())cur = 0;
+			pl.add(players[i]);
+			cur++;
+		}
+		return pl;
 	}
 
 	/**
@@ -102,8 +136,11 @@ public class Game {
 	 * non-vide de la réserve (cartes royaume et cartes communes)
 	 */
 	public CardList availableSupplyCards() {
-		//TODO
-		return null;
+		CardList cards = new CardList();
+		for(CardList supply : supplyStacks){
+			cards.add(supply.get(0));
+		}
+		return cards;
 	}
 
 	/**
@@ -141,7 +178,9 @@ public class Game {
 	 * ne correspond
 	 */
 	public Card getFromSupply(String cardName) {
-		//TODO
+		for(Card c : availableSupplyCards()){
+			if(c.getName().equals(cardName))return c;
+		}
 		return null;
 	}
 
@@ -153,7 +192,13 @@ public class Game {
 	 * ne correspond au nom passé en argument
 	 */
 	public Card removeFromSupply(String cardName) {
-		//TODO
+		Card c = getFromSupply(cardName);
+		for(CardList list : supplyStacks){
+			if(list.contains(c)){
+				list.remove(c);
+				return c;
+			}
+		}
 		return null;
 	}
 
