@@ -1,6 +1,7 @@
 package dominion.card.base;
 import dominion.Player;
 import dominion.card.AttackCard;
+import dominion.card.Card;
 
 /**
  * Carte Bureaucrate (Bureaucrat)
@@ -16,6 +17,16 @@ public class Bureaucrat extends AttackCard {
 
 	@Override
 	public void play(Player p) {
-		//TODO
+		Card c = p.getGame().removeFromSupply("Silver");
+		p.getDraw().add(c);
+		for(Player o : p.otherPlayers()){
+			if(o.getVictoryCards().isEmpty())System.out.println(o.cardsInHand());
+			else{
+				Card v = o.getHand().getCard(o.chooseCard("Choississez une carte victoire.", o.getVictoryCards(), false));
+				System.out.println(v);
+				o.getDraw().add(v);
+				o.getHand().remove(v);
+			}
+		}
 	}
 }

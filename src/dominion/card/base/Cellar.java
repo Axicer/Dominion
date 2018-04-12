@@ -17,6 +17,6 @@ public class Cellar extends ActionCard {
 
 	@Override
 	public void play(Player p) {
-		//TODO
+		
 	}
 }

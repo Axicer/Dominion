@@ -30,7 +30,13 @@ public class Player {
 	/**
 	 * Nombre de pièces disponibles pour acheter des cartes
 	 */
-	private int money;
+	private int money;//		Card cartepiochee;
+//	while((cartepiochee = p.drawCard()) != null && tresor.size() < 2){
+//	if(p.drawCard() instanceof TreasureCard)tresor.add(cartepiochee);
+//	else defausse.add(cartepiochee);
+//}
+//p.
+//TODO
 
 	/**
 	 * Nombre d'achats disponibles
@@ -109,6 +115,13 @@ public class Player {
 		return game;
 	}
 
+	public CardList getDraw() {
+		return draw;
+	}
+	
+	public CardList getHand(){
+		return hand;
+	}
 	/**
 	 * Incrémente le nombre d'actions du joueur
 	 * 
@@ -324,7 +337,11 @@ public class Player {
 	public void gain(Card c) {
 		if(c != null)discard.add(c);
 	}
-
+	
+	public void gainHand(Card c){
+		hand.add(c);
+	}
+	
 	/**
 	 * Le joueur gagne une carte de la réserve
 	 * 

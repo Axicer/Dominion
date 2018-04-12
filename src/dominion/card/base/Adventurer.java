@@ -1,6 +1,9 @@
 package dominion.card.base;
 import dominion.Player;
 import dominion.card.ActionCard;
+import dominion.card.Card;
+import dominion.card.CardList;
+import dominion.card.TreasureCard;
 
 /**
  * Carte Aventurier (Adventurer)
@@ -15,6 +18,21 @@ public class Adventurer extends ActionCard {
 
 	@Override
 	public void play(Player p) {
-		//TODO
+		CardList tresor = new CardList();
+		CardList defausse = new CardList();
+		for(Card c : p.getDraw()){
+			if(c instanceof TreasureCard){
+				tresor.add(c);
+			}else{
+				defausse.add(c);
+			}
+			if(tresor.size() >= 2)break;
+		}
+		for(Card c : tresor){
+			p.gainHand(c);
+		}
+		for(Card c : defausse){
+			p.gain(c);
+		}
 	}
 }
