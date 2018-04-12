@@ -221,7 +221,7 @@ public class Game {
 	 * Teste si la partie est terminée
 	 * 
 	 * @return un booléen indiquant si la partie est terminée, c'est-à-dire si
-	 * au moins l'unedes deux conditions de fin suivantes est vraie
+	 * au moins l'une des deux conditions de fin suivantes est vraie
 	 *  - 3 piles ou plus de la réserve sont vides
 	 *  - la pile de Provinces de la réserve est vide
 	 * (on suppose que toute partie contient une pile de Provinces, et donc si 
@@ -229,8 +229,14 @@ public class Game {
 	 * c'est que la partie est terminée)
 	 */
 	public boolean isFinished() {
-		//TODO
-		return false;
+		int emptyCount = 0;
+		for(CardList l : supplyStacks){
+			if(l.isEmpty())emptyCount++;
+			else{
+				if(l.getCard("Province") == null)return true;
+			}
+		}
+		return emptyCount >= 3;
 	}
 
 	/**
