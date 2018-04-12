@@ -80,6 +80,7 @@ public class Game {
 		supplyStacks.add(estateList);
 		supplyStacks.add(dutchyList);
 		supplyStacks.add(provinceList);
+		supplyStacks.addAll(kingdomStacks);
 	}
 
 	/**
