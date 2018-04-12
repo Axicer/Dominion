@@ -1,8 +1,15 @@
 package dominion;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import dominion.card.*;
-import dominion.card.common.*;
+import dominion.card.Card;
+import dominion.card.CardList;
+import dominion.card.common.Copper;
+import dominion.card.common.Duchy;
+import dominion.card.common.Estate;
+import dominion.card.common.Gold;
+import dominion.card.common.Province;
+import dominion.card.common.Silver;
 
 /**
  * Class représentant une partie de Dominion
@@ -200,6 +207,14 @@ public class Game {
 			}
 		}
 		return null;
+	}
+
+	public CardList getTrashedCards() {
+		return trashedCards;
+	}
+
+	public void setTrashedCards(CardList trashedCards) {
+		this.trashedCards = trashedCards;
 	}
 
 	/**

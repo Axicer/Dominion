@@ -1,7 +1,15 @@
 package dominion;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
 
-import dominion.card.*;
+import dominion.card.ActionCard;
+import dominion.card.Card;
+import dominion.card.CardList;
+import dominion.card.TreasureCard;
+import dominion.card.VictoryCard;
 import dominion.card.common.Copper;
 import dominion.card.common.Estate;
 
@@ -197,12 +205,16 @@ public class Player {
 	 * @return la carte piochée, {@code null} si aucune carte disponible
 	 */
 	public Card drawCard() {
-		discard.shuffle();
-		for(Card c : discard){
-			draw.add(c);
+		if(draw.isEmpty()){
+			discard.shuffle();
+			for(Card c : discard){
+				draw.add(c);
+			}
+			discard.clear();
+			return draw.remove(draw.size()-1);
 		}
-		discard.clear();
-		return draw.get(0);
+		if(draw.isEmpty() && discard.isEmpty())return null;
+		return draw.remove(draw.size()-1);
 	}
 
 	/**
