@@ -18,6 +18,6 @@ public class Moat extends ReactionCard {
 
 	@Override
 	public void play(Player p) {
-		//TODO
+		for(int i = 0 ; i < 2 ; i++)p.drawCard();
 	}
 }

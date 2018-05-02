@@ -5,6 +5,7 @@ import java.util.List;
 import dominion.Player;
 import dominion.card.AttackCard;
 import dominion.card.Card;
+import dominion.events.list.AttackCardSentEvent;
 
 /**
  * Carte Espion (Spy)
@@ -26,13 +27,20 @@ public class Spy extends AttackCard {
 		p.incrementActions(1);
 		List<Player> players = p.getGame().otherPlayers(p);
 		players.add(p);
-		players.forEach(pl -> {
+		for(Player pl : players){ 
+			if(!pl.equals(p)){
+				//send attack event
+				AttackCardSentEvent event = new AttackCardSentEvent(pl);
+				p.getGame().getEventManager().sendEvent(event);
+				if(event.isCancelled())continue;
+			}
+			
 			Card first = pl.getDraw().get(pl.getDraw().size()-1);
 			List<String> choices = Arrays.asList("y","n");
 			String choice = p.choose("voulez vous defausser cette carte", choices, true);
 			if(choice.equals("y")){
 				pl.drawToDiscard(first);
 			}
-		});
+		}
 	}
 }

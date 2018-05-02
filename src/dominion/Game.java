@@ -10,11 +10,16 @@ import dominion.card.common.Estate;
 import dominion.card.common.Gold;
 import dominion.card.common.Province;
 import dominion.card.common.Silver;
+import dominion.events.EventManager;
 
 /**
  * Class représentant une partie de Dominion
  */
 public class Game {
+	/**
+	 * Gere tous les evenements de la partie
+	 */
+	private EventManager eventManager;
 	/**
 	 * Tableau contenant les joueurs de la partie
 	 */
@@ -54,6 +59,7 @@ public class Game {
 	 * - 8 (si 2 joueurs) ou 12 (si 3 ou 4 joueurs) Estate, Duchy et Province 	 * - 10 * (n-1) Curse où n est le nombre de joueurs dans la partie
 	 */
 	public Game(String[] playerNames, List<CardList> kingdomStacks) {
+		eventManager = new EventManager();
 		players = new Player[playerNames.length];
 		for(int i = 0 ; i < playerNames.length ; i ++){
 			players[i] = new Player(playerNames[i], this);
@@ -263,5 +269,9 @@ public class Game {
 			Player p = this.players[i];
 			System.out.println(String.format("%s: %d Points.\n%s\n", p.getName(), p.victoryPoints(), p.totalCards().toString()));
 		}
+	}
+
+	public EventManager getEventManager() {
+		return eventManager;
 	}
 }

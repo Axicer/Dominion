@@ -1,5 +1,6 @@
 package dominion;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
@@ -12,11 +13,13 @@ import dominion.card.TreasureCard;
 import dominion.card.VictoryCard;
 import dominion.card.common.Copper;
 import dominion.card.common.Estate;
+import dominion.events.EventListener;
+import dominion.events.list.AttackCardSentEvent;
 
 /**
  * Un joueur de Dominion
  */
-public class Player {
+public class Player implements EventListener{
 	/**
 	 * Nom du joueur
 	 */
@@ -78,6 +81,7 @@ public class Player {
 	public Player(String name, Game game) {
 		this.name = name;
 		this.game = game;
+		this.game.getEventManager().addListener(this);
 		for(int i = 0 ; i < 3 ; i++){
 			discard.add(new Estate());
 		}
@@ -87,6 +91,7 @@ public class Player {
 		for(int i = 0 ; i < 3 ; i++){
 			drawCard();
 		}
+		
 	}
 
 	public String getName() {
@@ -115,6 +120,9 @@ public class Player {
 	
 	public CardList getHand(){
 		return hand;
+	}
+	public CardList getDiscard(){
+		return discard;
 	}
 	/**
 	 * Incrémente le nombre d'actions du joueur
@@ -651,6 +659,24 @@ public class Player {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+	
+	// LISTENERS //
+	
+	public void onActionCardSent(AttackCardSentEvent ev){
+		//if we are the target
+		if(ev.getTarget().equals(this)){
+			//if there is a Moat card in the player hand
+			if(getHand().stream().filter(c -> c.getName().equals("Douves")).findAny().orElse(null) != null){
+				List<String> choices = Arrays.asList("y","n");
+				String choice = choose("Vous avez une carte Douves, voulez vous la jouer", choices, true);
+				if(choice.equals("y")){
+					Card c = getHand().getCard("Douves");
+					playCard(c);
+					ev.setCancelled(true);
+				}
+			}
+		}
 	}
 	
 }

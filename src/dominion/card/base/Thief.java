@@ -4,6 +4,7 @@ import dominion.card.AttackCard;
 import dominion.card.Card;
 import dominion.card.CardList;
 import dominion.card.CardType;
+import dominion.events.list.AttackCardSentEvent;
 
 /**
  * Carte Voleur (Thief)
@@ -23,6 +24,11 @@ public class Thief extends AttackCard {
 	public void play(Player p) {
 		CardList recup = new CardList();
 		for(Player opl : p.getGame().otherPlayers(p)){
+			//send attack event
+			AttackCardSentEvent event = new AttackCardSentEvent(opl);
+			p.getGame().getEventManager().sendEvent(event);
+			if(event.isCancelled())continue;
+			
 			CardList treasureCard = new CardList();
 			CardList revealedCard = new CardList();
 			for(int i = 0 ; i < 2 || i < opl.getDraw().size() ; i++){

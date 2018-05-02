@@ -1,6 +1,8 @@
 package dominion.card.base;
 import dominion.Player;
 import dominion.card.AttackCard;
+import dominion.card.Card;
+import dominion.events.list.AttackCardSentEvent;
 
 /**
  * Carte Milice (Militia)
@@ -16,6 +18,18 @@ public class Militia extends AttackCard {
 
 	@Override
 	public void play(Player p) {
-		//TODO
+		p.incrementMoney(2);
+		for(Player o : p.getGame().otherPlayers(p)){
+			//send attack event
+			AttackCardSentEvent event = new AttackCardSentEvent(o);
+			p.getGame().getEventManager().sendEvent(event);
+			if(event.isCancelled())continue;
+			
+			while(p.getHand().size() > 3){
+				Card first = p.getHand().get(p.getHand().size()-1);
+				p.getHand().remove(first);
+				p.getDiscard().add(first);
+			}
+		}
 	}
 }
