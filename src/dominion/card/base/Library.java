@@ -6,11 +6,14 @@ import dominion.Player;
 import dominion.card.ActionCard;
 import dominion.card.Card;
 import dominion.card.CardList;
+import dominion.card.CardType;
 
 /**
  * Carte Bibliothèque (Library)
  * 
- * Piochez jusqu'à ce que vous ayez 7 cartes en main. Chaque carte Action piochée peut être mise de côté. Défaussez les cartes mises de côté lorsque vous avez terminé de piocher.
+ * Piochez jusqu'à ce que vous ayez 7 cartes en main.
+ * Chaque carte Action piochée peut être mise de côté.
+ * Défaussez les cartes mises de côté lorsque vous avez terminé de piocher.
  */
 public class Library extends ActionCard {
 
@@ -25,10 +28,12 @@ public class Library extends ActionCard {
 			Card c = p.drawCard();
 			System.out.println(c);
 			List<String> choices = Arrays.asList("y","n");
-			if(p.choose("Voulez-vous garder cette carte ?", choices, false).equals("y")){
-				p.getHand().add(c);
-			}else{
-				defausse.add(c);
+			if(c.getTypes().contains(CardType.Action)){
+				if(p.choose("["+p.getName()+"]> Voulez-vous garder cette carte ?", choices, false).equals("y")){
+					p.getHand().add(c);
+				}else{
+					defausse.add(c);
+				}
 			}
 		}
 		p.getDiscard().addAll(defausse);

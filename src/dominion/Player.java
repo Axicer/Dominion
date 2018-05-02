@@ -81,17 +81,23 @@ public class Player implements EventListener{
 	public Player(String name, Game game) {
 		this.name = name;
 		this.game = game;
+		this.hand = new CardList();
+		this.discard = new CardList();
+		this.draw = new CardList();
+		this.inPlay = new CardList();
+		
 		this.game.getEventManager().addListener(this);
+		
 		for(int i = 0 ; i < 3 ; i++){
 			discard.add(new Estate());
 		}
 		for(int i = 0 ; i < 7 ; i++){
 			discard.add(new Copper());
 		}
-		for(int i = 0 ; i < 3 ; i++){
-			drawCard();
+		discard.shuffle();
+		for(int i = 0 ; i < 5 ; i++){
+			hand.add(drawCard());
 		}
-		
 	}
 
 	public String getName() {
@@ -123,6 +129,9 @@ public class Player implements EventListener{
 	}
 	public CardList getDiscard(){
 		return discard;
+	}
+	public CardList getInPlay(){
+		return inPlay;
 	}
 	/**
 	 * Incrémente le nombre d'actions du joueur
@@ -560,7 +569,7 @@ public class Player implements EventListener{
 		}
 		inPlay.clear();
 		for(int i = 0 ; i < 5 ; i++){
-			drawCard();
+			this.hand.add(drawCard());
 		}
 	}
 
@@ -594,7 +603,7 @@ public class Player implements EventListener{
 	public void playTurn() {
 		startTurn();
 		while(actions > 0){
-			String cardName = chooseCard("Choisissez une carte d'action : ", getActionCards(), true);
+			String cardName = chooseCard("["+getName()+"]> Choisissez une carte d'action : ", getActionCards(), true);
 			if(cardName.equals(""))break;
 			Card c = gain(cardName);
 			playCard(c);
@@ -604,11 +613,15 @@ public class Player implements EventListener{
 			playCard(c);
 		}
 		while(buys > 0){
-			String cardName = chooseCard("Choisissez une carte d'action : ", getTreasureCards(), true);
+			String cardName = chooseCard("["+getName()+"]> Choisissez une carte a acheter : ", game.availableSupplyCards(), true);
 			if(cardName.equals(""))break;
-			Card c = gain(cardName);
-			playCard(c);
-			incrementBuys(-1);
+			Card c = game.getFromSupply(cardName);
+			if(c.getCost()<= money){
+				gain(cardName);
+				incrementBuys(-1);
+			}else{
+				System.out.println("mdr t'es pauvre.");
+			}
 		}
 		endTurn();
 	}

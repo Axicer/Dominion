@@ -1,7 +1,4 @@
 package dominion.card.base;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import dominion.Player;
 import dominion.card.ActionCard;
 import dominion.card.Card;
@@ -21,9 +18,10 @@ public class Workshop extends ActionCard {
 	@Override
 	public void play(Player p) {
 		//get a list of cards corresponding to a cost <= 4
-		List<Card> cards = p.getGame().availableSupplyCards().stream().filter(c -> c.getCost()<=4).collect(Collectors.toList());
+		CardList cards = new CardList();
+		p.getGame().availableSupplyCards().stream().filter(c -> c.getCost()<=4).forEach(cards::add);
 		//ask for a card
-		String cardName = p.chooseCard("choisissez une carte parmi la liste", new CardList(cards), false);
+		String cardName = p.chooseCard("["+p.getName()+"]> choisissez une carte parmi la liste", new CardList(cards), false);
 		//get the card
 		Card choosen = p.getGame().getFromSupply(cardName);
 		

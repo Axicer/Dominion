@@ -36,8 +36,9 @@ public class Spy extends AttackCard {
 			}
 			
 			Card first = pl.getDraw().get(pl.getDraw().size()-1);
+			System.out.println(first);
 			List<String> choices = Arrays.asList("y","n");
-			String choice = p.choose("voulez vous defausser cette carte", choices, true);
+			String choice = p.choose("["+p.getName()+"]> voulez vous defausser cette carte", choices, true);
 			if(choice.equals("y")){
 				pl.drawToDiscard(first);
 			}

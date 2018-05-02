@@ -12,7 +12,7 @@ import dominion.events.list.AttackCardSentEvent;
  */
 public class Bureaucrat extends AttackCard {
 
-	public Bureaucrat(String name, int cost) {
+	public Bureaucrat() {
 		super("Bureaucrate", 4);
 	}
 
@@ -28,7 +28,7 @@ public class Bureaucrat extends AttackCard {
 			
 			if(o.getVictoryCards().isEmpty())System.out.println(o.cardsInHand());
 			else{
-				Card v = o.getHand().getCard(o.chooseCard("Choississez une carte victoire.", o.getVictoryCards(), false));
+				Card v = o.getHand().getCard(o.chooseCard("["+o.getName()+"]> Choississez une carte victoire.", o.getVictoryCards(), false));
 				System.out.println(v);
 				o.getDraw().add(v);
 				o.getHand().remove(v);

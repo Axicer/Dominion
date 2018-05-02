@@ -80,6 +80,7 @@ public class Game {
 				provinceList.add(new Province());
 			}
 		}
+		supplyStacks = new ArrayList<>();
 		supplyStacks.add(copperList);
 		supplyStacks.add(silverList);
 		supplyStacks.add(goldList);
@@ -239,7 +240,7 @@ public class Game {
 		int emptyCount = 0;
 		for(CardList l : supplyStacks){
 			if(l.isEmpty())emptyCount++;
-			else{
+			else if(l.get(0).getClass().equals(Province.class)){
 				if(l.getCard("Province") == null)return true;
 			}
 		}

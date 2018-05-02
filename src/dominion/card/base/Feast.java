@@ -1,7 +1,4 @@
 package dominion.card.base;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import dominion.Player;
 import dominion.card.ActionCard;
 import dominion.card.Card;
@@ -21,18 +18,21 @@ public class Feast extends ActionCard {
 
 	@Override
 	public void play(Player p) {
+		//ajoute la carte à la trashedCards List et la retire de la main
+		p.getGame().getTrashedCards().add(this);
+		p.getInPlay().remove(this);
+
 		//get a list of cards corresponding to a cost <= 5
-		List<Card> cards = p.getGame().availableSupplyCards().stream().filter(c -> c.getCost()<=5).collect(Collectors.toList());
+		CardList cards = new CardList();
+		p.getGame().availableSupplyCards().stream().filter(c -> c.getCost()<=5).forEach(cards::add);
 		//ask for a card
-		String cardName = p.chooseCard("choisissez une carte parmi la liste", new CardList(cards), false);
+		String cardName = p.chooseCard("choisissez une carte parmi la liste", cards, false);
 		//get the card
 		Card choosen = p.getGame().getFromSupply(cardName);
 		
 		//remove from supply and gain the card
 		p.getGame().removeFromSupply(choosen.getName());
 		p.gain(choosen);
-		//ajoute la carte à la trashedCards List et la retire de la main
-		p.getGame().getTrashedCards().add(this);
-		p.getHand().remove(this);
+		
 	}
 }

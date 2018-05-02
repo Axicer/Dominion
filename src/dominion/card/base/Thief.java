@@ -34,14 +34,14 @@ public class Thief extends AttackCard {
 			for(int i = 0 ; i < 2 || i < opl.getDraw().size() ; i++){
 				revealedCard.add(opl.getDraw().get(i));
 			}
-			System.out.println("carte révélés de "+opl.getName()+":");
+			System.out.println("["+p.getName()+"]> carte révélés de "+opl.getName()+":");
 			revealedCard.stream().map(Card::getName).forEach(System.out::println);
 			//add all treasure card to treasureCard list
 			revealedCard.stream().filter(c -> c.getTypes().contains(CardType.Treasure)).forEach(treasureCard::add);
 			//if there is some treasure cards
 			if(treasureCard.size() != 0){
 				//choose a card
-				String choose = p.chooseCard("choisissez une carte", treasureCard, false);
+				String choose = p.chooseCard("["+p.getName()+"]> choisissez une carte", treasureCard, false);
 				Card choosenCard = treasureCard.getCard(choose);
 				//add to the future recup card list
 				recup.add(choosenCard);

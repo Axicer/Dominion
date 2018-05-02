@@ -10,13 +10,11 @@ import dominion.card.ActionCard;
 public class Smithy extends ActionCard {
 
 	public Smithy() {
-		super("FOrgeron", 4);
+		super("Forgeron", 4);
 	}
 
 	@Override
 	public void play(Player p) {
-		for(int i = 0 ; i < 3 ; i++){
-			p.drawCard();
-		}
+		for(int i = 0 ; i < 3 ; i++)p.drawCard();
 	}
 }
