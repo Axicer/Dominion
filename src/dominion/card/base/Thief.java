@@ -32,7 +32,7 @@ public class Thief extends AttackCard {
 			revealedCard.stream().map(Card::getName).forEach(System.out::println);
 			//add all treasure card to treasureCard list
 			revealedCard.stream().filter(c -> c.getTypes().contains(CardType.Treasure)).forEach(treasureCard::add);
-			//if ther is some treasure cards
+			//if there is some treasure cards
 			if(treasureCard.size() != 0){
 				//choose a card
 				String choose = p.chooseCard("choisissez une carte", treasureCard, false);
