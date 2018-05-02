@@ -16,6 +16,7 @@ public class Woodcutter extends ActionCard {
 
 	@Override
 	public void play(Player p) {
-		//TODO
+		p.incrementBuys(1);
+		p.incrementMoney(2);
 	}
 }

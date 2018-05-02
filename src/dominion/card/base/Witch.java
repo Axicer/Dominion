@@ -1,6 +1,7 @@
 package dominion.card.base;
 import dominion.Player;
 import dominion.card.AttackCard;
+import dominion.card.Card;
 
 /**
  * Carte Sorcière (Witch)
@@ -16,6 +17,14 @@ public class Witch extends AttackCard {
 
 	@Override
 	public void play(Player p) {
-		//TODO
+		//draw 2 cards
+		for(int i = 0 ; i < 2 ; i++){
+			p.drawCard();
+		}
+		//for each other players get a Curse Card from supply and gain it
+		for(Player opl : p.getGame().otherPlayers(p)){
+			Card c = p.getGame().removeFromSupply("Curse");
+			opl.gain(c);
+		}
 	}
 }
