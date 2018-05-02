@@ -1,6 +1,7 @@
 package dominion.card.base;
 import dominion.Player;
 import dominion.card.ActionCard;
+import dominion.card.Card;
 
 /**
  * Carte Cave (Cellar)
@@ -17,6 +18,12 @@ public class Cellar extends ActionCard {
 
 	@Override
 	public void play(Player p) {
-		
+		p.incrementActions(1);
+		String carte = p.chooseCard("Choissisez une carte à défausser: ", p.getHand(), true);
+		while(carte != ""){
+			p.handToDiscard(p.getHand().getCard(carte));
+			p.drawCard();
+			carte = p.chooseCard("Choissisez une carte à défausser: ", p.getHand(), true);
+		}
 	}
 }

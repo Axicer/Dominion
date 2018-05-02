@@ -30,13 +30,7 @@ public class Player {
 	/**
 	 * Nombre de pièces disponibles pour acheter des cartes
 	 */
-	private int money;//		Card cartepiochee;
-//	while((cartepiochee = p.drawCard()) != null && tresor.size() < 2){
-//	if(p.drawCard() instanceof TreasureCard)tresor.add(cartepiochee);
-//	else defausse.add(cartepiochee);
-//}
-//p.
-//TODO
+	private int money;
 
 	/**
 	 * Nombre d'achats disponibles
@@ -337,11 +331,23 @@ public class Player {
 	public void gain(Card c) {
 		if(c != null)discard.add(c);
 	}
-	
+	/**
+	 * Le joueur gagne une carte, la carte est placée dans sa main.
+	 * @param c
+	 */
 	public void gainHand(Card c){
 		hand.add(c);
 	}
-	
+	/**
+	 * Défausse de la main la carte entrée en paramètre.
+	 * @param c
+	 */
+	public void handToDiscard(Card c){
+		if(hand.contains(c)){
+			hand.remove(c);
+			discard.add(c);
+		}
+	}
 	/**
 	 * Le joueur gagne une carte de la réserve
 	 * 
