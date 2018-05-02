@@ -116,6 +116,10 @@ public class Player {
 	public CardList getHand(){
 		return hand;
 	}
+	
+	public CardList getDiscard(){
+		return discard;
+	}
 	/**
 	 * Incrémente le nombre d'actions du joueur
 	 * 
