@@ -1,4 +1,7 @@
 package dominion.card.base;
+import java.util.Arrays;
+import java.util.List;
+
 import dominion.Player;
 import dominion.card.ActionCard;
 
@@ -16,6 +19,15 @@ public class Chancellor extends ActionCard {
 
 	@Override
 	public void play(Player p) {
-		//TODO
+			//On incrémente la money du joueur de 2
+			p.incrementMoney(2);
+			//Création d'une liste de choix
+			List<String> choices = Arrays.asList("y","n");
+			if(p.choose("Voulez-vous défausser vote deck ?", choices, false).equals("y")){
+				//Ajoute toutes les cartes du deck dans la discard
+				p.getDiscard().addAll(p.getDraw());
+				//Supprime toutes les cartes du deck
+				p.getDraw().clear();
+			}
 	}
 }
