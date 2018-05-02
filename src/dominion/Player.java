@@ -45,7 +45,7 @@ public class Player {
 	/**
 	 * Liste des cartes dans la main du joueur
 	 */
-	private CardList hand;
+	public CardList hand;
 
 	/**
 	 * Liste des cartes dans la défausse du joueur
@@ -353,6 +353,16 @@ public class Player {
 		}
 	}
 	/**
+	 * Défausse de la pioche la carte entrée en paramètre.
+	 * @param c
+	 */
+	public void drawToDiscard(Card c){
+		if(draw.contains(c)){
+			draw.remove(c);
+			discard.add(c);
+		}
+	}
+	/**
 	 * Le joueur gagne une carte de la réserve
 	 * 
 	 * @param cardName nom de la carte à gagner. S'il existe une carte dans la 
@@ -598,4 +608,53 @@ public class Player {
 		}
 		endTurn();
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Player other = (Player) obj;
+		if (actions != other.actions)
+			return false;
+		if (buys != other.buys)
+			return false;
+		if (discard == null) {
+			if (other.discard != null)
+				return false;
+		} else if (!discard.equals(other.discard))
+			return false;
+		if (draw == null) {
+			if (other.draw != null)
+				return false;
+		} else if (!draw.equals(other.draw))
+			return false;
+		if (game == null) {
+			if (other.game != null)
+				return false;
+		} else if (!game.equals(other.game))
+			return false;
+		if (hand == null) {
+			if (other.hand != null)
+				return false;
+		} else if (!hand.equals(other.hand))
+			return false;
+		if (inPlay == null) {
+			if (other.inPlay != null)
+				return false;
+		} else if (!inPlay.equals(other.inPlay))
+			return false;
+		if (money != other.money)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+	
 }

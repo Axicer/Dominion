@@ -6,12 +6,14 @@ import dominion.card.ReactionCard;
  * Carte Douves (Moat)
  * 
  * +2 Cartes.
- * Lorsqu’un adversaire joue une carte Attaque, vous pouvez dévoiler cette carte de votre main. Dans ce cas, l’Attaque n’a pas d’effet sur vous.
+ * Lorsqu’un adversaire joue une carte Attaque,
+ * vous pouvez dévoiler cette carte de votre main.
+ * Dans ce cas, l’Attaque n’a pas d’effet sur vous.
  */
 public class Moat extends ReactionCard {
 
 	public Moat() {
-		super("DOuves", 2);
+		super("Douves", 2);
 	}
 
 	@Override
