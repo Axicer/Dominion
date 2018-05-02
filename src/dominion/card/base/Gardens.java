@@ -14,7 +14,9 @@ public class Gardens extends VictoryCard {
 	}
 
 	@Override
-	public void play(Player p) {
-		//TODO
+	public void play(Player p) {}
+	
+	public int victoryValue(Player p){
+		return p.totalCards().size()/10;
 	}
 }

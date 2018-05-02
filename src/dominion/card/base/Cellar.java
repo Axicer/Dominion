@@ -1,7 +1,6 @@
 package dominion.card.base;
 import dominion.Player;
 import dominion.card.ActionCard;
-import dominion.card.Card;
 
 /**
  * Carte Cave (Cellar)

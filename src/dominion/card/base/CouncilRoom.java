@@ -17,6 +17,11 @@ public class CouncilRoom extends ActionCard {
 
 	@Override
 	public void play(Player p) {
-		//TODO
+		//Le joueur pioche 4 cartes
+		for(int i = 0; i < 4; i++)p.drawCard();
+		//Ajoute un achat au joueur
+		p.incrementBuys(1);
+		//Les joueurs adversaires piochent une carte
+		for(Player o : p.otherPlayers())o.drawCard();
 	}
 }

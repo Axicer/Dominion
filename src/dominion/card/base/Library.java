@@ -1,6 +1,11 @@
 package dominion.card.base;
+import java.util.Arrays;
+import java.util.List;
+
 import dominion.Player;
 import dominion.card.ActionCard;
+import dominion.card.Card;
+import dominion.card.CardList;
 
 /**
  * Carte Bibliothèque (Library)
@@ -15,6 +20,17 @@ public class Library extends ActionCard {
 
 	@Override
 	public void play(Player p) {
-		//TODO
+		CardList defausse = new CardList();
+		while(p.getHand().size() <= 7){
+			Card c = p.drawCard();
+			System.out.println(c);
+			List<String> choices = Arrays.asList("y","n");
+			if(p.choose("Voulez-vous garder cette carte ?", choices, false).equals("y")){
+				p.getHand().add(c);
+			}else{
+				defausse.add(c);
+			}
+		}
+		p.getDiscard().addAll(defausse);
 	}
 }

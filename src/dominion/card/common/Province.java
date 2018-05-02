@@ -15,7 +15,5 @@ public class Province extends VictoryCard {
 	}
 
 	@Override
-	public void play(Player p) {
-		//TODO
-	}
+	public void play(Player p) {}
 }
