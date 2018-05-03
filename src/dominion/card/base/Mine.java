@@ -35,6 +35,6 @@ public class Mine extends ActionCard {
 		
 		//gain it
 		p.getGame().removeFromSupply(choosen);
-		p.gain(winchoosenCard);
+		p.gainHand(winchoosenCard);
 	}
 }

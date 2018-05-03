@@ -19,7 +19,7 @@ public class Witch extends AttackCard {
 	@Override
 	public void play(Player p) {
 		//draw 2 cards
-		for(int i = 0 ; i < 2 ; i++)p.drawCard();
+		for(int i = 0 ; i < 2 ; i++)p.getHand().add(p.drawCard());
 		
 		//for each other players get a Curse Card from supply and gain it
 		for(Player opl : p.getGame().otherPlayers(p)){

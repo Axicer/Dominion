@@ -16,7 +16,7 @@ public class Village extends ActionCard {
 
 	@Override
 	public void play(Player p) {
-		p.drawCard();
+		p.getHand().add(p.drawCard());
 		p.incrementActions(2);
 	}
 }

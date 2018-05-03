@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.jar.JarEntry;
@@ -34,7 +35,7 @@ class Main {
 //		}
 		try {
 			List<Class<?>> cardClasses = getClasses("dominion.card.base");
-			for(int i = 0 ; i < 10 ; i++){
+			for(int i = 0 ; i < 25; i++){
 				Class<?> choosenClass = cardClasses.get(new Random().nextInt(cardClasses.size()));
 				CardList list = new CardList();
 				for(int j = 0 ; j < 10 ; j++){

@@ -26,7 +26,7 @@ public class Feast extends ActionCard {
 		CardList cards = new CardList();
 		p.getGame().availableSupplyCards().stream().filter(c -> c.getCost()<=5).forEach(cards::add);
 		//ask for a card
-		String cardName = p.chooseCard("choisissez une carte parmi la liste", cards, false);
+		String cardName = p.chooseCard("choisissez une carte parmi la liste:\n"+cards, cards, false);
 		//get the card
 		Card choosen = p.getGame().getFromSupply(cardName);
 		

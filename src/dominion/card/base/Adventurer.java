@@ -21,12 +21,14 @@ public class Adventurer extends ActionCard {
 	public void play(Player p) {
 		CardList tresor = new CardList();
 		CardList defausse = new CardList();
-		for(Card c : p.getDraw()){
+		CardList fausseDraw = new CardList(p.getDraw());
+		for(Card c : fausseDraw){
 			if(c instanceof TreasureCard){
 				tresor.add(c);
 			}else{
 				defausse.add(c);
 			}
+			p.getDraw().remove(c);
 			if(tresor.size() >= 2)break;
 		}
 		for(Card c : tresor){

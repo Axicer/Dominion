@@ -23,7 +23,7 @@ public class Chancellor extends ActionCard {
 			p.incrementMoney(2);
 			//Création d'une liste de choix
 			List<String> choices = Arrays.asList("y","n");
-			if(p.choose("["+p.getName()+"]> Voulez-vous défausser vote deck ?", choices, false).equals("y")){
+			if(p.choose("["+p.getName()+"]> Voulez-vous défausser vote deck ? (y/n)", choices, false).equals("y")){
 				//Ajoute toutes les cartes du deck dans la discard
 				p.getDiscard().addAll(p.getDraw());
 				//Supprime toutes les cartes du deck

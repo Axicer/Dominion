@@ -28,8 +28,9 @@ public class Bureaucrat extends AttackCard {
 			
 			if(o.getVictoryCards().isEmpty())System.out.println(o.cardsInHand());
 			else{
+				System.out.println("test");
 				Card v = o.getHand().getCard(o.chooseCard("["+o.getName()+"]> Choississez une carte victoire.", o.getVictoryCards(), false));
-				System.out.println(v);
+				System.out.println("["+p.getName()+"]> Carte victoire de "+o.getName()+" devoilée et placée sur le deck: "+v);
 				o.getDraw().add(v);
 				o.getHand().remove(v);
 			}

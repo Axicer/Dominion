@@ -59,6 +59,7 @@ public class Game {
 	 * - 8 (si 2 joueurs) ou 12 (si 3 ou 4 joueurs) Estate, Duchy et Province 	 * - 10 * (n-1) Curse où n est le nombre de joueurs dans la partie
 	 */
 	public Game(String[] playerNames, List<CardList> kingdomStacks) {
+		trashedCards = new CardList();
 		eventManager = new EventManager();
 		players = new Player[playerNames.length];
 		for(int i = 0 ; i < playerNames.length ; i ++){
@@ -135,10 +136,11 @@ public class Game {
 		List<Player> pl = new ArrayList<Player>();
 		int i = indexOfPlayer(p);
 		int cur = i+1;
+		if(cur == numberOfPlayers())cur = 0;
 		while(cur != i){
-			if(cur == numberOfPlayers())cur = 0;
-			pl.add(players[i]);
+			pl.add(players[cur]);
 			cur++;
+			if(cur == numberOfPlayers())cur = 0;
 		}
 		return pl;
 	}
