@@ -13,7 +13,7 @@ import dominion.card.common.Copper;
 public class Moneylender extends ActionCard {
 
 	public Moneylender() {
-		super("Prêteur sur gages", 4);
+		super("Moneylender", 4);
 	}
 
 	@Override

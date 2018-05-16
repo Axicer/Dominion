@@ -13,11 +13,13 @@ import dominion.card.ReactionCard;
 public class Moat extends ReactionCard {
 
 	public Moat() {
-		super("Douves", 2);
+		super("Moat", 2);
 	}
 
 	@Override
 	public void play(Player p) {
-		for(int i = 0 ; i < 2 ; i++)p.getHand().add(p.drawCard());
+		for(int i = 0 ; i < 2 ; i++){
+			p.getHand().add(p.drawCard());
+		}
 	}
 }

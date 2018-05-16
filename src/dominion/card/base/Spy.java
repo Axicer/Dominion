@@ -1,4 +1,5 @@
 package dominion.card.base;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,15 +19,16 @@ import dominion.events.list.AttackCardSentEvent;
 public class Spy extends AttackCard {
 
 	public Spy() {
-		super("Espion", 4);
+		super("Spy", 4);
 	}
 
 	@Override
 	public void play(Player p) {
 		p.getHand().add(p.drawCard());
 		p.incrementActions(1);
-		List<Player> players = p.getGame().otherPlayers(p);
+		List<Player> players = new ArrayList<Player>();
 		players.add(p);
+		players.addAll(p.getGame().otherPlayers(p));
 		for(Player pl : players){ 
 			if(!pl.equals(p)){
 				//send attack event
@@ -35,12 +37,14 @@ public class Spy extends AttackCard {
 				if(event.isCancelled())continue;
 			}
 			
-			Card first = pl.getDraw().get(pl.getDraw().size()-1);
-			System.out.println(first);
+			Card first = pl.drawCard();
+			System.out.println("premiere carte du deck de ["+pl.getName()+"] : "+first);
 			List<String> choices = Arrays.asList("y","n");
 			String choice = p.choose("["+p.getName()+"]> voulez vous defausser cette carte", choices, true);
 			if(choice.equals("y")){
-				pl.drawToDiscard(first);
+				pl.getDiscard().add(first);
+			}else{
+				pl.getDraw().add(first);
 			}
 		}
 	}

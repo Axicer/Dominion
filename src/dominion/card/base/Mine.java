@@ -3,6 +3,7 @@ import dominion.Player;
 import dominion.card.ActionCard;
 import dominion.card.Card;
 import dominion.card.CardList;
+import dominion.card.CardType;
 
 /**
  * Carte Mine
@@ -27,7 +28,10 @@ public class Mine extends ActionCard {
 		
 		//get all cards available
 		CardList choices = new CardList();
-		p.getGame().availableSupplyCards().stream().filter(ca -> ca.getCost() <= cost+3).forEach(choices::add);
+		p.getGame().availableSupplyCards()
+			.stream()
+			.filter(ca -> ca.getCost() <= cost+3 && ca.getTypes().contains(CardType.Treasure))
+			.forEach(choices::add);
 		
 		//choose a card
 		String choosen = p.chooseCard("choisissez une carte:", choices, false);

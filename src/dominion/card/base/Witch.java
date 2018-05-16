@@ -13,7 +13,7 @@ import dominion.events.list.AttackCardSentEvent;
 public class Witch extends AttackCard {
 
 	public Witch() {
-		super("Sorciere", 5);
+		super("Witch", 5);
 	}
 
 	@Override

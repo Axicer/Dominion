@@ -13,7 +13,7 @@ import dominion.events.list.AttackCardSentEvent;
 public class Militia extends AttackCard {
 
 	public Militia() {
-		super("milice", 4);
+		super("Militia", 4);
 	}
 
 	@Override
@@ -25,10 +25,11 @@ public class Militia extends AttackCard {
 			p.getGame().getEventManager().sendEvent(event);
 			if(event.isCancelled())continue;
 			
-			while(p.getHand().size() > 3){
-				Card first = p.getHand().get(p.getHand().size()-1);
-				p.getHand().remove(first);
-				p.getDiscard().add(first);
+			while(o.getHand().size() > 3){
+				Card c = o.getHand().getCard(o.chooseCard("["+o.getName()+"] choisissez une carte à defausser", o.getHand(), false));
+				o.getHand().remove(c);
+				o.getDiscard().add(c);
+				System.out.println(o.getHand());
 			}
 		}
 	}

@@ -12,7 +12,7 @@ import dominion.card.ActionCard;
 public class Cellar extends ActionCard {
 
 	public Cellar() {
-		super("Cave", 2);
+		super("Cellar", 2);
 	}
 
 	@Override

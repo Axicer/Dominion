@@ -14,7 +14,7 @@ import dominion.card.ActionCard;
 public class Chancellor extends ActionCard {
 
 	public Chancellor() {
-		super("Chancellier", 3);
+		super("Chancellor", 3);
 	}
 
 	@Override

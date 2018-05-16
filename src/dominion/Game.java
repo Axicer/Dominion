@@ -5,6 +5,7 @@ import java.util.List;
 import dominion.card.Card;
 import dominion.card.CardList;
 import dominion.card.common.Copper;
+import dominion.card.common.Curse;
 import dominion.card.common.Duchy;
 import dominion.card.common.Estate;
 import dominion.card.common.Gold;
@@ -71,6 +72,7 @@ public class Game {
 		CardList estateList = new CardList();
 		CardList dutchyList = new CardList();
 		CardList provinceList = new CardList();
+		CardList curseList = new CardList();
 		for(int i = 0 ; i < 60 ; i++){
 			copperList.add(new Copper());
 			if(i < 40)silverList.add(new Silver());
@@ -80,6 +82,9 @@ public class Game {
 				dutchyList.add(new Duchy());
 				provinceList.add(new Province());
 			}
+			if(i < 10*(players.length-1)){
+				curseList.add(new Curse());
+			}
 		}
 		supplyStacks = new ArrayList<>();
 		supplyStacks.add(copperList);
@@ -88,6 +93,7 @@ public class Game {
 		supplyStacks.add(estateList);
 		supplyStacks.add(dutchyList);
 		supplyStacks.add(provinceList);
+		supplyStacks.add(curseList);
 		supplyStacks.addAll(kingdomStacks);
 	}
 
@@ -155,7 +161,7 @@ public class Game {
 	public CardList availableSupplyCards() {
 		CardList cards = new CardList();
 		for(CardList supply : supplyStacks){
-			cards.add(supply.get(0));
+			if(!supply.isEmpty())cards.add(supply.get(0));
 		}
 		return cards;
 	}
@@ -240,10 +246,10 @@ public class Game {
 	 */
 	public boolean isFinished() {
 		int emptyCount = 0;
+		if(getFromSupply("Province") == null)return true;
 		for(CardList l : supplyStacks){
-			if(l.isEmpty())emptyCount++;
-			else if(l.get(0).getClass().equals(Province.class)){
-				if(l.getCard("Province") == null)return true;
+			if(l.isEmpty()){
+				emptyCount++;
 			}
 		}
 		return emptyCount >= 3;

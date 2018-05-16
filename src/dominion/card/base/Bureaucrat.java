@@ -13,7 +13,7 @@ import dominion.events.list.AttackCardSentEvent;
 public class Bureaucrat extends AttackCard {
 
 	public Bureaucrat() {
-		super("Bureaucrate", 4);
+		super("Bureaucrat", 4);
 	}
 
 	@Override
@@ -28,7 +28,6 @@ public class Bureaucrat extends AttackCard {
 			
 			if(o.getVictoryCards().isEmpty())System.out.println(o.cardsInHand());
 			else{
-				System.out.println("test");
 				Card v = o.getHand().getCard(o.chooseCard("["+o.getName()+"]> Choississez une carte victoire.", o.getVictoryCards(), false));
 				System.out.println("["+p.getName()+"]> Carte victoire de "+o.getName()+" devoilée et placée sur le deck: "+v);
 				o.getDraw().add(v);

@@ -12,7 +12,7 @@ import dominion.card.CardList;
 public class Workshop extends ActionCard {
 
 	public Workshop() {
-		super("Atelier", 3);
+		super("Workshop", 3);
 	}
 
 	@Override

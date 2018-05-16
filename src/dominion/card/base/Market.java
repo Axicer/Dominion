@@ -13,7 +13,7 @@ import dominion.card.ActionCard;
 public class Market extends ActionCard {
 
 	public Market() {
-		super("Marché", 5);
+		super("Market", 5);
 	}
 
 	@Override

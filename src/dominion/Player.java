@@ -98,6 +98,8 @@ public class Player implements EventListener{
 		for(int i = 0 ; i < 5 ; i++){
 			hand.add(drawCard());
 		}
+		
+		game.getEventManager().addListener(this);
 	}
 
 	public String getName() {
@@ -195,7 +197,7 @@ public class Player implements EventListener{
 	 */
 	public int victoryPoints() {
 		int p = 0;
-		for(Card c : draw){
+		for(Card c : totalCards()){
 			if(c instanceof VictoryCard){
 				p+= ((VictoryCard)c).victoryValue(this);
 			}
@@ -235,10 +237,10 @@ public class Player implements EventListener{
 				draw.add(c);
 			}
 			discard.clear();
-			return draw.remove(draw.size()-1);
+			return draw.isEmpty() ? null : draw.remove(0);
 		}
 		if(draw.isEmpty() && discard.isEmpty())return null;
-		return draw.remove(draw.size()-1);
+		return draw.isEmpty() ? null : draw.remove(0);
 	}
 
 	/**
@@ -408,8 +410,9 @@ public class Player implements EventListener{
 	 * lieu
 	 */
 	public Card buyCard(String cardName) {
+		Card c = null;
 		if(buys > 0){
-			Card c = game.getFromSupply(cardName);
+			c = game.getFromSupply(cardName);
 			if(c == null)return null;
 			if(c.getCost() <= money){
 				incrementMoney(-c.getCost());
@@ -419,7 +422,7 @@ public class Player implements EventListener{
 				return null;
 			}
 		}
-		return null;
+		return c;
 	}
 
 	/**
@@ -692,11 +695,11 @@ public class Player implements EventListener{
 		//if we are the target
 		if(ev.getTarget().equals(this)){
 			//if there is a Moat card in the player hand
-			if(getHand().stream().filter(c -> c.getName().equals("Douves")).findAny().orElse(null) != null){
+			if(getHand().stream().filter(c -> c.getName().equals("Moat")).findAny().orElse(null) != null){
 				List<String> choices = Arrays.asList("y","n");
 				String choice = choose("Vous avez une carte Douves, voulez vous la jouer", choices, true);
 				if(choice.equals("y")){
-					Card c = getHand().getCard("Douves");
+					Card c = getHand().getCard("Moat");
 					playCard(c);
 					ev.setCancelled(true);
 				}

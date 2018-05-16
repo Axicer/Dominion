@@ -13,7 +13,7 @@ import dominion.card.CardList;
 public class Remodel extends ActionCard {
 
 	public Remodel() {
-		super("Rénovation", 4);
+		super("Remodel", 4);
 	}
 
 	@Override
