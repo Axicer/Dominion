@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Scanner;
 import java.util.Set;
 
 import dominion.card.ActionCard;
@@ -474,8 +473,6 @@ public class Player implements EventListener{
 			// Un seul choix possible (renvoyer cet unique élément)
 			return choiceSet.iterator().next();
 		} else {
-			@SuppressWarnings("resource")
-			Scanner sc = new Scanner(System.in);
 			String input;
 			// Lit l'entrée de l'utilisateur jusqu'à obtenir un choix valide
 			while (true) {
@@ -490,7 +487,7 @@ public class Player implements EventListener{
 				System.out.println(">>> " + instruction);
 				System.out.print("> ");
 				// lit l'entrée de l'utilisateur au clavier
-				input = sc.nextLine();
+				input = game.readLine();
 				if (choiceSet.contains(input) || (canPass && input.equals(""))){
 					// si une réponse valide est obtenue, elle est renvoyée
 					return input;

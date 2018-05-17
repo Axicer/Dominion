@@ -1,6 +1,7 @@
 package dominion;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import dominion.card.Card;
 import dominion.card.CardList;
@@ -46,6 +47,8 @@ public class Game {
 	 */
 	private CardList trashedCards;
 
+	private Scanner scanner;
+	
 	/**
 	 * Constructeur
 	 * 
@@ -60,6 +63,7 @@ public class Game {
 	 * - 8 (si 2 joueurs) ou 12 (si 3 ou 4 joueurs) Estate, Duchy et Province 	 * - 10 * (n-1) Curse où n est le nombre de joueurs dans la partie
 	 */
 	public Game(String[] playerNames, List<CardList> kingdomStacks) {
+		this.scanner = new Scanner(System.in);
 		trashedCards = new CardList();
 		eventManager = new EventManager();
 		players = new Player[playerNames.length];
@@ -282,5 +286,9 @@ public class Game {
 
 	public EventManager getEventManager() {
 		return eventManager;
+	}
+	
+	public String readLine() {
+		return scanner.nextLine();
 	}
 }

@@ -40,7 +40,6 @@ public abstract class Test {
 	 * @param test: condition à tester
 	 */
 	public void check(boolean test) {
-		System.out.println(test);
 		this.testOk &= test;
 	}
 
