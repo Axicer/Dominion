@@ -606,25 +606,25 @@ public class Player implements EventListener{
 	public void playTurn() {
 		startTurn();
 		while(actions > 0){
-			System.out.println("--- BEFORE ACTION ---");
-			System.out.println("discard "+discard);
-			System.out.println("draw "+draw);
+//			System.out.println("--- BEFORE ACTION ---");
+//			System.out.println("discard "+discard);
+//			System.out.println("draw "+draw);
 			String cardName = chooseCard("["+getName()+"]> Choisissez une carte d'action : ", getActionCards(), true);
 			if(cardName.equals(""))break;
 			Card c = getActionCards().getCard(cardName);
 			playCard(c);
 			incrementActions(-1);
-			System.out.println("--- AFTER ACTION ---");
-			System.out.println("discard "+discard);
-			System.out.println("draw "+draw);
+//			System.out.println("--- AFTER ACTION ---");
+//			System.out.println("discard "+discard);
+//			System.out.println("draw "+draw);
 		}
 		for(Card c : getTreasureCards()){
 			playCard(c);
 		}
 		while(buys > 0){
-			System.out.println("--- BEFORE BUY ---");
-			System.out.println("discard "+discard);
-			System.out.println("draw "+draw);
+//			System.out.println("--- BEFORE BUY ---");
+//			System.out.println("discard "+discard);
+//			System.out.println("draw "+draw);
 			String cardName = chooseCard("["+getName()+"]> Choisissez une carte a acheter : ", game.availableSupplyCards(), true);
 			if(cardName.equals(""))break;
 			Card c = game.getFromSupply(cardName);
@@ -634,9 +634,9 @@ public class Player implements EventListener{
 			}else{
 				System.out.println("mdr t'es pauvre.");
 			}
-			System.out.println("--- AFTER BUY ---");
-			System.out.println("discard "+discard);
-			System.out.println("draw "+draw);
+//			System.out.println("--- AFTER BUY ---");
+//			System.out.println("discard "+discard);
+//			System.out.println("draw "+draw);
 		}
 		endTurn();
 	}

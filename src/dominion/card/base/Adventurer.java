@@ -14,7 +14,7 @@ import dominion.card.TreasureCard;
 public class Adventurer extends ActionCard {
 
 	public Adventurer() {
-		super("Aventurier", 6);
+		super("Adventurer", 6);
 	}
 
 	@Override

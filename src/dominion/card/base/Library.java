@@ -18,7 +18,7 @@ import dominion.card.CardType;
 public class Library extends ActionCard {
 
 	public Library() {
-		super("Bibliotheque", 5);
+		super("Library", 5);
 	}
 
 	@Override
@@ -26,14 +26,17 @@ public class Library extends ActionCard {
 		CardList defausse = new CardList();
 		while(p.getHand().size() <= 7){
 			Card c = p.drawCard();
-			System.out.println(c);
+			if(c == null)break;
+			else System.out.println(c);
 			List<String> choices = Arrays.asList("y","n");
 			if(c.getTypes().contains(CardType.Action)){
-				if(p.choose("["+p.getName()+"]> Voulez-vous garder cette carte ?", choices, false).equals("y")){
+				if(p.choose("["+p.getName()+"]> Voulez-vous garder cette carte ? ("+c+")", choices, false).equals("y")){
 					p.getHand().add(c);
 				}else{
 					defausse.add(c);
 				}
+			}else{
+				p.getHand().add(c);
 			}
 		}
 		p.getDiscard().addAll(defausse);
